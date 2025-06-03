@@ -93,10 +93,15 @@
     canvas.addEventListener('mousemove', draw);
     window.addEventListener('mouseup', endDraw);
 
-    canvas.addEventListener('touchstart', startDraw, false);
-    canvas.addEventListener('touchmove', draw, false);
-    window.addEventListener('touchend', endDraw, false);
+    //canvas.addEventListener('touchstart', startDraw, false);
+    //canvas.addEventListener('touchmove', draw, false);
+    //window.addEventListener('touchend', endDraw, false);
 
+    canvas.addEventListener('touchstart', startDraw, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    window.addEventListener('touchend', endDraw, { passive: false });
+
+    
     function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
