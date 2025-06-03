@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>注音猜中文字</title>
+
+  <style>
+
+    body { font-family: sans-serif; padding: 24px; background: #f7f7f7; }
+
+    #bopomofo { font-size: 48px; margin: 20px 0; }
+
+    #char { font-size: 48px; color: #333; margin: 20px 0; display: none; }
+
+    button { margin: 10px; font-size: 20px; padding: 10px; }
+
+    #status { color: red; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <h1>注音猜中文字</h1>
+
+  <div id="status"></div>
+
+  <div id="bopomofo"></div>
+
+  <button onclick="speak()">讀出發音</button>
+
+  <button onclick="showChar()">顯示中文字</button>
+
+  <div id="char"></div>
+
+  <br>
+
+  <button onclick="nextQuestion()">下一題</button>
+
+
+
+  <script>
+
+    let data = [];
+
+    let current = null;
+
+
+
+    async function loadData() {
+
+      try {
+
+        document.getElementById('status').innerText = '載入中...';
+
+        // fetch 須確定data.json 路徑正確
+
+        const response = await fetch('data.json');
+
+        if (!response.ok) throw new Error('無法讀取 data.json');
+
+        data = await response.json();
+
+        if (!data || data.length === 0) throw new Error('資料為空');
+
+        document.getElementById('status').innerText = '';
+
+        nextQuestion();
+
+      } catch(e) {
+
+        document.getElementById('status').innerText = '資料載入失敗: ' + e.message;
+
+      }
+
+    }
+
+
+
+    function nextQuestion() {
+
+      if (!data || data.length === 0) {
+
+        document.getElementById('bopomofo').innerText = '';
+
+        return;
+
+      }
+
+      current = data[Math.floor(Math.random() * data.length)];
+
+      document.getElementById('bopomofo').innerText = current.bopomofo || '無注音';
+
+      document.getElementById('char').innerText = current.char || '';
+
+      document.getElementById('char').style.display = 'none';
+
+    }
+
+
+
+    function speak() {
+
+      if (!current) return;
+
+      let utter = new SpeechSynthesisUtterance(current.char);
+
+      utter.lang = 'zh-TW';
+
+      utter.rate = 0.8;
+
+      window.speechSynthesis.speak(utter);
+
+    }
+
+
+
+    function showChar() {
+
+      document.getElementById('char').style.display = 'block';
+
+    }
+
+
+
+    // 頁面載入時呼叫
+
+    loadData();
+
+  </script>
+
+</body>
+
+</html>

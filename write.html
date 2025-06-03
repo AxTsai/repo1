@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>手寫注音人工比對</title>
+  <style>
+    body { font-family: sans-serif; padding: 24px; background: #f7f7f7;}
+    #char { font-size: 48px; margin: 20px 0; }
+    button { font-size: 20px; margin: 10px;}
+    #showBopomofo { font-size: 40px; color: #0078d7; margin-top: 15px; display:none; }
+    #canvasWrap { margin: 10px 0; }
+    canvas { background: #fff; border: 2px solid #888; touch-action: none; }
+    #notice { color: #888; }
+  </style>
+</head>
+<body>
+  <h1>請在下方手寫區寫出這個字的注音</h1>
+  <div id="char"></div>
+  <div id="canvasWrap">
+    <canvas id="drawZone" width="260" height="80"></canvas>
+    <br>
+    <button onclick="clearCanvas()">清除手寫區</button>
+  </div>
+  <div id="notice">（請用滑鼠手寫注音，無法自動比對，請自行對照正確答案）</div>
+  <button onclick="showBopomofo()">顯示正確注音</button>
+  <div id="showBopomofo"></div>
+  <button onclick="nextQuestion()" style="margin-top:24px;">下一題</button>
+  <script>
+    let data = [];
+    let current = null;
+
+    async function loadData() {
+      const response = await fetch('data.json');
+      data = await response.json();
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      current = data[Math.floor(Math.random() * data.length)];
+      document.getElementById('char').innerText = current.char;
+      document.getElementById('showBopomofo').style.display = 'none';
+      document.getElementById('showBopomofo').innerText = '';
+      clearCanvas();
+    }
+
+    function showBopomofo() {
+      document.getElementById('showBopomofo').innerText = '正確注音：' + current.bopomofo;
+      document.getElementById('showBopomofo').style.display = 'block';
+    }
+
+    // Canvas 手寫區
+    const canvas = document.getElementById('drawZone');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+
+    function getPos(e) {
+      if (e.touches) {
+        let rect = canvas.getBoundingClientRect();
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      } else {
+        return { x: e.offsetX, y: e.offsetY };
+      }
+    }
+
+    function startDraw(e) {
+      drawing = true;
+      ctx.beginPath();
+      const pos = getPos(e);
+      ctx.moveTo(pos.x, pos.y);
+      e.preventDefault();
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      const pos = getPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.strokeStyle = '#333';
+      ctx.lineWidth = 4;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function endDraw(e) {
+      drawing = false;
+      e.preventDefault();
+    }
+
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    window.addEventListener('mouseup', endDraw);
+
+    canvas.addEventListener('touchstart', startDraw, false);
+    canvas.addEventListener('touchmove', draw, false);
+    window.addEventListener('touchend', endDraw, false);
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
