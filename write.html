@@ -19,16 +19,21 @@
   <div id="canvasWrap">
     <canvas id="drawZone" width="400" height="150"></canvas>
     <br>
-    <button onclick="clearCanvas()">清除手寫區</button>
+    <button id="clearBtn">清除手寫區</button>
   </div>
   <div id="notice">（請用滑鼠手寫注音，無法自動比對，請自行對照正確答案）</div>
-  <button onclick="showBopomofo()">顯示正確注音</button>
+  <button id="showBtn">顯示正確注音</button>
   <div id="showBopomofo"></div>
-  <button onclick="nextQuestion()" style="margin-top:24px;">下一題</button>
+  <button id="nextBtn">下一題</button>
   <script>
     let data = [];
     let current = null;
 
+    document.getElementById('clearBtn').addEventListener('click', clearCanvas);
+    document.getElementById('showBtn').addEventListener('click', showBopomofo);
+    document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+
+    
     async function loadData() {
       const response = await fetch('data.json');
       data = await response.json();
