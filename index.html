@@ -1,139 +1,54 @@
 <!DOCTYPE html>
-
-<html lang="zh-TW">
-
+<html lang="zh-Hant">
 <head>
-
   <meta charset="UTF-8">
-
-  <title>注音猜中文字</title>
-
+  <title>注音學習網頁</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f9f9f9;
+    }
 
-    body { font-family: sans-serif; padding: 24px; background: #f7f7f7; }
+    h1 {
+      margin-bottom: 40px;
+    }
 
-    #bopomofo { font-size: 48px; margin: 20px 0; }
+    .btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
 
-    #char { font-size: 48px; color: #333; margin: 20px 0; display: none; }
+    .btn-zhuyin {
+      background-color: #4CAF50; /* 綠色 */
+      color: white;
+    }
 
-    button { margin: 10px; font-size: 20px; padding: 10px; }
+    .btn-zhuyin:hover {
+      background-color: #45a049;
+    }
 
-    #status { color: red; }
+    .btn-write {
+      background-color: #2196F3; /* 藍色 */
+      color: white;
+    }
 
+    .btn-write:hover {
+      background-color: #1976D2;
+    }
   </style>
-
 </head>
-
 <body>
-
-  <h1>注音猜中文字</h1>
-
-  <div id="status"></div>
-
-  <div id="bopomofo"></div>
-
-  <button onclick="speak()">讀出發音</button>
-
-  <button onclick="showChar()">顯示中文字</button>
-
-  <div id="char"></div>
-
-  <br>
-
-  <button onclick="nextQuestion()">下一題</button>
-
-
-
-  <script>
-
-    let data = [];
-
-    let current = null;
-
-
-
-    async function loadData() {
-
-      try {
-
-        document.getElementById('status').innerText = '載入中...';
-
-        // fetch 須確定data.json 路徑正確
-
-        const response = await fetch('data.json');
-
-        if (!response.ok) throw new Error('無法讀取 data.json');
-
-        data = await response.json();
-
-        if (!data || data.length === 0) throw new Error('資料為空');
-
-        document.getElementById('status').innerText = '';
-
-        nextQuestion();
-
-      } catch(e) {
-
-        document.getElementById('status').innerText = '資料載入失敗: ' + e.message;
-
-      }
-
-    }
-
-
-
-    function nextQuestion() {
-
-      if (!data || data.length === 0) {
-
-        document.getElementById('bopomofo').innerText = '';
-
-        return;
-
-      }
-
-      current = data[Math.floor(Math.random() * data.length)];
-
-      document.getElementById('bopomofo').innerText = current.bopomofo || '無注音';
-
-      document.getElementById('char').innerText = current.char || '';
-
-      document.getElementById('char').style.display = 'none';
-
-    }
-
-
-
-    function speak() {
-
-      if (!current) return;
-
-      let utter = new SpeechSynthesisUtterance(current.char);
-
-      utter.lang = 'zh-TW';
-
-      utter.rate = 0.8;
-
-      window.speechSynthesis.speak(utter);
-
-    }
-
-
-
-    function showChar() {
-
-      document.getElementById('char').style.display = 'block';
-
-    }
-
-
-
-    // 頁面載入時呼叫
-
-    loadData();
-
-  </script>
-
+  <h1>注音學習</h1>
+  <a href="speak.html" class="btn btn-zhuyin">注音拼音</a>
+  <a href="write.html" class="btn btn-write">寫注音</a>
 </body>
-
 </html>
