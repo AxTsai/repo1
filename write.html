@@ -9,7 +9,7 @@
     button { font-size: 20px; margin: 10px;}
     #showBopomofo { font-size: 40px; color: #0078d7; margin-top: 15px; display:none; }
     #canvasWrap { margin: 10px 0; }
-    canvas { background: #fff; border: 2px solid #888;  }
+    canvas { background: #fff; border: 2px solid #888; touch-action: none; }
     #notice { color: #888; }
   </style>
 </head>
@@ -17,23 +17,18 @@
   <h1>請在下方手寫區寫出這個字的注音</h1>
   <div id="char"></div>
   <div id="canvasWrap">
-    <canvas id="drawZone" width="400" height="150"></canvas>
+    <canvas id="drawZone" width="400" height="100"></canvas>
     <br>
-    <button id="clearBtn">清除手寫區</button>
+    <button onclick="clearCanvas()">清除手寫區</button>
   </div>
   <div id="notice">（請用滑鼠手寫注音，無法自動比對，請自行對照正確答案）</div>
-  <button id="showBtn">顯示正確注音</button>
+  <button onclick="showBopomofo()">顯示正確注音</button>
   <div id="showBopomofo"></div>
-  <button id="nextBtn">下一題</button>
+  <button onclick="nextQuestion()" style="margin-top:24px;">下一題</button>
   <script>
     let data = [];
     let current = null;
 
-    document.getElementById('clearBtn').addEventListener('click', clearCanvas);
-    document.getElementById('showBtn').addEventListener('click', showBopomofo);
-    document.getElementById('nextBtn').addEventListener('click', nextQuestion);
-
-    
     async function loadData() {
       const response = await fetch('data.json');
       data = await response.json();
@@ -75,7 +70,8 @@
       ctx.beginPath();
       const pos = getPos(e);
       ctx.moveTo(pos.x, pos.y);
-      e.preventDefault();
+      // 僅在canvas行為阻止瀏覽器滾動
+      if (e.cancelable) e.preventDefault();
     }
 
     function draw(e) {
@@ -86,27 +82,26 @@
       ctx.lineWidth = 4;
       ctx.lineCap = "round";
       ctx.stroke();
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
     }
 
     function endDraw(e) {
-      drawing = false;
-      e.preventDefault();
+      if (drawing) {
+        drawing = false;
+        // 僅在canvas行為阻止瀏覽器滾動
+        if (e && e.cancelable) e.preventDefault();
+      }
     }
 
+    // 只在canvas本身註冊事件，不要註冊到window以免造成整頁按鈕失效
     canvas.addEventListener('mousedown', startDraw);
     canvas.addEventListener('mousemove', draw);
-    window.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseup', endDraw);
 
-    //canvas.addEventListener('touchstart', startDraw, false);
-    //canvas.addEventListener('touchmove', draw, false);
-    //window.addEventListener('touchend', endDraw, false);
+    canvas.addEventListener('touchstart', startDraw, false);
+    canvas.addEventListener('touchmove', draw, false);
+    canvas.addEventListener('touchend', endDraw, false);
 
-    canvas.addEventListener('touchstart', startDraw, { passive: false });
-    canvas.addEventListener('touchmove', draw, { passive: false });
-    window.addEventListener('touchend', endDraw, { passive: false });
-
-    
     function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
