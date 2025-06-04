@@ -6,7 +6,23 @@
   <style>
     body { font-family: sans-serif; padding: 24px; background: #f7f7f7;}
     #char { font-size: 48px; margin: 20px 0; }
-    button { font-size: 20px; margin: 10px;}
+    button {
+  font-size: 28px;
+  padding: 18px 36px;
+  margin: 12px;
+  min-width: 120px;
+  min-height: 56px;
+  border-radius: 12px;
+  background: #0078d7;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:active {
+  background: #005fa3;
+}
     #showBopomofo { font-size: 40px; color: #0078d7; margin-top: 15px; display:none; }
     #canvasWrap { margin: 10px 0; }
     canvas { background: #fff; border: 2px solid #888; touch-action: none; }
