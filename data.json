@@ -1,17 +1,17 @@
  [
 	{"char": "伊布", "bopomofo": "ㄧˉ ㄅㄨˋ"},
-	 {"char": "水伊布", "bopomofo": "ㄕㄨㄟˇ 　ㄧˉ ㄅㄨˋ"},
-	 {"char": "雷伊布", "bopomofo": "ㄌ　ㄟˊ 　ㄧˉ ㄅㄨˋ"},
-	 {"char": "火伊布", "bopomofo": "ㄏㄨㄛˇ 　ㄧˉ ㄅㄨˋ"},
-	{"char": "葉伊布", "bopomofo": "ㄧㄝˋ 　ㄧˉ ㄅㄨˋ"},
-	 {"char": "冰伊布", "bopomofo": "ㄅㄧㄥˉ 　ㄧˉ ㄅㄨˋ"},
-	 {"char": "仙子伊布", "bopomofo": "ㄒㄧㄢˉ ㄗˇ 　ㄧˉ ㄅㄨˋ"},
-	 {"char": "太陽伊布", "bopomofo": "ㄊㄞˋ ㄧㄤˊ  ㄧˉ ㄅㄨˋ"},
+	 {"char": "水伊布", "bopomofo": "ㄕㄨㄟˇ ㄧˉ ㄅㄨˋ"},
+	 {"char": "雷伊布", "bopomofo": "ㄌㄟˊ ㄧˉ ㄅㄨˋ"},
+	 {"char": "火伊布", "bopomofo": "ㄏㄨㄛˇ ㄧˉ ㄅㄨˋ"},
+	{"char": "葉伊布", "bopomofo": "ㄧㄝˋ ㄧˉ ㄅㄨˋ"},
+	 {"char": "冰伊布", "bopomofo": "ㄅㄧㄥˉ ㄧˉ ㄅㄨˋ"},
+	 {"char": "仙子伊布", "bopomofo": "ㄒㄧㄢˉ ㄗˇ ㄧˉ ㄅㄨˋ"},
+	 {"char": "太陽伊布", "bopomofo": "ㄊㄞˋ ㄧㄤˊ ㄧˉ ㄅㄨˋ"},
 	 {"char": "月亮伊布", "bopomofo": "ㄩㄝˋ ㄌㄧㄤˋ ㄧˉ ㄅㄨˋ"},
 	 {"char": "皮卡丘", "bopomofo": "ㄆ一ˊ ㄎㄚˇ ㄑ一ㄡ"},
 	 
   {"char": "比比鳥", "bopomofo": "ㄅㄧˇ ㄅㄧˇ ㄋㄧㄠˇ"},
-  {"char": "霸王花", "bopomofo": "ㄅㄚˋ 　ㄨㄤˊ ㄏㄨㄚˉ"},
+  {"char": "霸王花", "bopomofo": "ㄅㄚˋ ㄨㄤˊ ㄏㄨㄚˉ"},
   {"char": "布土撥", "bopomofo": "ㄅㄨˋ ㄊㄨˇ ㄅㄛˉ"},
   {"char": "巴大蝶", "bopomofo": "ㄅㄚˉ ㄉㄚˋ ㄉㄧㄝˊ"},
   {"char": "暴雪王", "bopomofo": "ㄅㄠˋ ㄒㄩㄝˇ ㄨㄤˊ"},
@@ -76,11 +76,11 @@
   {"char": "小火龍", "bopomofo": "ㄒㄧㄠˇ ㄏㄨㄛˇ ㄌㄨㄥˊ"},
   {"char": "新葉喵", "bopomofo": "ㄒㄧㄣˉ ㄧㄝˋ ㄇㄧㄠˉ"},
 
-  {"char": "稚山雀", "bopomofo": "ㄓˋ ㄕㄢˉㄑㄩㄝˋ"},
+  {"char": "稚山雀", "bopomofo": "ㄓˋ ㄕㄢˉ ㄑㄩㄝˋ"},
   {"char": "珍珠貝", "bopomofo": "ㄓㄣˉ ㄓㄨ　ㄅㄟˋ"},
   {"char": "逐電犬", "bopomofo": "ㄓㄨˊ ㄉㄧㄢˋ ㄑㄩㄢˇ"},
-  {"char": "沼王", "bopomofo": "ㄓㄠˇ 　ㄨㄤˊ"},
-  {"char": "紙御劍", "bopomofo": "ㄓˇ 　ㄩˋ ㄐㄧㄢˋ"},
+  {"char": "沼王", "bopomofo": "ㄓㄠˇ ㄨㄤˊ"},
+  {"char": "紙御劍", "bopomofo": "ㄓˇ ㄩˋ ㄐㄧㄢˋ"},
 
   {"char": "超夢", "bopomofo": "ㄔㄠˉ ㄇㄥˋ"},
   {"char": "超壞星", "bopomofo": "ㄔㄠˉ ㄏㄨㄞˋ ㄒㄧㄥˉ"},
@@ -103,7 +103,15 @@
 
 	{"char": "走路草", "bopomofo": "ㄗㄡˇ ㄌㄨˋ ㄘㄠ"},
 	 {"char": "走鯨", "bopomofo": "ㄗㄡˇ ㄐㄧㄥˉ"},
-  
+
+{"char": "沙奈朵", "bopomofo": "ㄕㄚˉ ㄋㄞˋ ㄉㄨㄛˇ"},
+{"char": "利歐路", "bopomofo": "ㄌㄧˋ ㄡˉ ㄌㄨˋ"},
+{"char": "路卡利歐", "bopomofo": "ㄌㄨˋ ㄎㄚˇ ㄌㄧˋ ㄡˉ"},
+{"char": "炎兔兒", "bopomofo": "ㄧㄢˊ ㄊㄨˋ ㄦˊ"},
+{"char": "淚眼蜥", "bopomofo": "ㄌㄟˋ ㄧㄢˇ ㄒㄧˉ"},
+{"char": "敲音猴", "bopomofo": "ㄑㄧㄠˉ ㄧㄣˉ ㄏㄡˊ"},
+{"char": "毒貝比", "bopomofo": "ㄉㄨˊ ㄅㄟˋ ㄅㄧˇ"},
+	 
   {"char": "索財靈", "bopomofo": "ㄙㄨㄛˇ ㄘㄞˊ ㄌㄧㄥˊ"},
   {"char": "砂岩蟲", "bopomofo": "ㄙㄚˉ ㄧㄢˊ ㄔㄨㄥˊ"},
   {"char": "傘電蜥", "bopomofo": "ㄙㄢˇ ㄉㄧㄢˋ ㄒㄧ"}
