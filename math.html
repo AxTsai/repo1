@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>數學-練習加法</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #333;
+    }
+    .equation {
+      font-size: 2rem;
+      margin: 20px;
+    }
+    .buttons {
+      margin: 20px;
+    }
+    .buttons button {
+      font-size: 1.2rem;
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .result {
+      font-size: 1.5rem;
+      margin: 20px;
+    }
+    #nextBtn {
+      margin-top: 30px;
+      font-size: 1rem;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>數學 - 練習加法</h1>
+
+  <!-- 第一區塊：題目 -->
+  <div class="equation" id="equation">題目載入中...</div>
+
+  <!-- 第二區塊：選項按鈕 -->
+  <div class="buttons" id="options"></div>
+
+  <!-- 第三區塊：結果 -->
+  <div class="result" id="result"></div>
+
+  <!-- 下一題 -->
+  <button id="nextBtn" onclick="generateQuestion()">下一題</button>
+
+  <script>
+    let correctAnswer = 0;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateQuestion() {
+      document.getElementById('result').textContent = '';
+      const buttonsDiv = document.getElementById('options');
+      buttonsDiv.innerHTML = '';
+
+      // 產生10以下的加法或減法（確保不為負）
+      const num1 = getRandomInt(0, 9);
+      const num2 = getRandomInt(0, 9);
+      const isAddition = Math.random() > 0.5;
+      const equationText = isAddition ? `${num1} + ${num2}` : `${Math.max(num1, num2)} - ${Math.min(num1, num2)}`;
+      correctAnswer = isAddition ? num1 + num2 : Math.max(num1, num2) - Math.min(num1, num2);
+
+      document.getElementById('equation').textContent = equationText;
+
+      // 隨機產生其他三個選項
+      const answers = new Set([correctAnswer]);
+      while (answers.size < 4) {
+        let fake = correctAnswer + getRandomInt(-5, 5);
+        if (fake >= 0 && fake !== correctAnswer) {
+          answers.add(fake);
+        }
+      }
+
+      // 打亂順序並顯示按鈕
+      const shuffled = Array.from(answers).sort(() => Math.random() - 0.5);
+
+      shuffled.forEach(val => {
+        const btn = document.createElement('button');
+        btn.textContent = val;
+        btn.onclick = () => checkAnswer(btn, val);
+        buttonsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selected) {
+      const allButtons = document.querySelectorAll('.buttons button');
+      allButtons.forEach(btn => btn.disabled = true);
+
+      if (selected === correctAnswer) {
+        button.style.backgroundColor = 'green';
+        document.getElementById('result').textContent = '✅ 答對了！';
+      } else {
+        button.style.backgroundColor = 'red';
+        document.getElementById('result').textContent = '❌ 答錯了！';
+      }
+    }
+
+    // 載入頁面時先顯示一題
+    generateQuestion();
+  </script>
+
+</body>
+</html>
