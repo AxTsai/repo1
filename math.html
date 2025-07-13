@@ -74,8 +74,8 @@
       buttonsDiv.innerHTML = '';
 
       // 產生10以下的加法或減法（確保不為負）
-      const num1 = getRandomInt(0, 9);
-      const num2 = getRandomInt(0, 9);
+      const num1 = getRandomInt(1, 9);
+      const num2 = getRandomInt(1, 9);
       const isAddition = Math.random() > 0.5;
       const equationText = isAddition ? `${num1} + ${num2}` : `${Math.max(num1, num2)} - ${Math.min(num1, num2)}`;
       correctAnswer = isAddition ? num1 + num2 : Math.max(num1, num2) - Math.min(num1, num2);
